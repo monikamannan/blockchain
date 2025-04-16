@@ -1,0 +1,24 @@
+name: Manual Build Trigger 1
+
+on:
+  workflow_dispatch:
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.inputs.branch }}
+
+      - name: Show Inputs
+        run: |
+          echo "Branch: ${{ github.event.inputs.branch }}"
+          echo "Build Name: ${{ github.event.inputs.buildName }}"
+
+      - name: Build Step
+        run: |
+          echo "Simulating build process..."
+          echo "Building branch '${{ github.event.inputs.branch }}' with build name '${{ github.event.inputs.buildName }}'"
