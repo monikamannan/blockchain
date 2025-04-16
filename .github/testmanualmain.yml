@@ -1,0 +1,33 @@
+name: Manual Build Trigger
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to build'
+        required: true
+        default: 'main'
+      buildName:
+        description: 'Custom build name'
+        required: false
+        default: 'default-build'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.inputs.branch }}
+
+      - name: Show Inputs
+        run: |
+          echo "Branch: ${{ github.event.inputs.branch }}"
+          echo "Build Name: ${{ github.event.inputs.buildName }}"
+
+      - name: Build Step
+        run: |
+          echo "Simulating build process..."
+          echo "Building branch '${{ github.event.inputs.branch }}' with build name '${{ github.event.inputs.buildName }}'"
